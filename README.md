@@ -3,7 +3,7 @@
 # 🎯 All In The Ring – Backend
 
 ### Enterprise-Grade Training & Rehabilitation Management API  
-Built with **Node.js | Express | MongoDB | Firebase | Docker**
+Built with **Node.js · Express · MongoDB · Firebase · Docker**
 
 ---
 
@@ -13,22 +13,26 @@ Built with **Node.js | Express | MongoDB | Firebase | Docker**
 
 ---
 
-# 📌 Project Description
+# 📌 Project Overview
 
-**All In The Ring Backend** is a Norway-based training and rehabilitation management system designed to manage structured learning programs for community users and prisoners within correctional facilities.
+**All In The Ring – Backend** is a Norway-based training and rehabilitation management system designed to manage structured learning programs for community users and prisoners within correctional facilities.
 
-The platform enables secure, role-based operations including:
+The platform enables secure, role-based operations across administrative, educational, and rehabilitation workflows while maintaining strict hierarchical communication and institutional-grade data security.
+
+---
+
+# 🎯 Key Capabilities
 
 - Admin management  
-- Mentorship hierarchy  
-- Class scheduling  
-- Attendance tracking  
-- Progress & milestone reporting  
-- Notifications  
+- Structured mentorship hierarchy  
+- Location-based class scheduling  
+- Attendance tracking (users & prisoners)  
+- Progress and milestone reporting  
+- Reward system management  
+- Push notifications  
 - Support ticket system  
 - Incident reporting  
-
-The system is built with clean architecture principles to ensure scalability, maintainability, and strict hierarchical communication.
+- Dynamic static content management  
 
 ---
 
@@ -37,48 +41,54 @@ The system is built with clean architecture principles to ensure scalability, ma
 - 🔐 JWT Authentication & Role-Based Access Control (RBAC)  
 - 👥 Multi-Role Hierarchy (Admin, Mentor, Instructor, User)  
 - 📅 Location-Based Class Scheduling  
-- 📝 Attendance Tracking (Users & Prisoners via Instructor)  
-- 📊 Progress & Milestone Reporting  
-- 🏆 Reward System Based on Participation  
+- 📝 Instructor-Managed Attendance System  
+- 📊 Progress & Milestone Tracking  
+- 🏆 Participation-Based Reward System  
 - 📄 PDF Progress Report Generation  
 - 💬 Hierarchy-Restricted Communication  
 - 🔔 Firebase Push Notifications  
 - 📬 Support Ticket Management  
-- 🚨 Incident Reporting System  
-- 📜 Dynamic Static Content Management  
-- ⏱ Cron-Based Background Jobs  
-- 🐳 Docker Support  
-- 🔄 Jenkins CI/CD Ready  
+- 🚨 Incident Reporting Module  
+- 📜 Static Content Management (Privacy, Terms, About)  
+- ⏱ Cron-Based Background Processing  
+- 🐳 Docker Container Support  
+- 🔄 Jenkins CI/CD Integration  
 
 ---
 
-# 🏗 Architecture Highlights
+# 🏗 Architecture
 
-- Modular MVC-Inspired Architecture  
-- Clean Separation of Concerns  
-- Service Layer Abstraction  
-- Centralized Logging & Error Handling  
-- Input Validation Middleware  
-- Rate Limiting & Security Middleware  
-- Soft Delete with Rollback Support  
-- Background Job Processing (Cron)  
+The backend follows a modular MVC-inspired architecture:
+
+```
+Routes → Middlewares → Controllers → Services → Models → Database
+```
+
+### Architecture Principles
+
+- Clear separation of concerns  
+- Service-layer abstraction  
+- Centralized logging & structured error handling  
+- Input validation middleware  
+- Security & rate-limiting middleware  
+- Soft delete with rollback support  
+- Cron-based background processing  
 
 ---
 
-# 🛠 Tech Stack
+# 🛠 Technology Stack
 
 | Layer | Technology |
 |-------|------------|
-Runtime | Node.js |
-Framework | Express.js |
-Database | MongoDB (Mongoose) |
-Authentication | JWT |
-Notifications | Firebase Cloud Messaging |
-Email | Nodemailer |
-Validation | Custom Middleware |
-Background Jobs | Node Cron |
-DevOps | Docker + Jenkins |
-Architecture | Modular & Scalable |
+| Runtime | Node.js |
+| Framework | Express.js |
+| Database | MongoDB (Mongoose ODM) |
+| Authentication | JWT |
+| Notifications | Firebase Cloud Messaging |
+| Email | Nodemailer |
+| Background Jobs | node-cron |
+| DevOps | Docker + Jenkins |
+| Architecture | Modular & Scalable |
 
 ---
 
@@ -86,26 +96,17 @@ Architecture | Modular & Scalable |
 
 | Package | Purpose |
 |----------|----------|
-express | REST API framework |
-mongoose | MongoDB ODM |
-jsonwebtoken | Authentication |
-bcrypt | Password hashing |
-firebase-admin | Push notifications |
-nodemailer | Email notifications |
-node-cron | Background jobs |
-multer | File handling |
-dotenv | Environment configuration |
-cors | Cross-origin support |
-winston/morgan | Logging middleware |
-
----
-
-# 🧪 Available Scripts
-
-| Script | Purpose |
-|--------|----------|
-npm run dev | Start server in development mode |
-npm start | Start production server |
+| express | REST API framework |
+| mongoose | MongoDB object modeling |
+| jsonwebtoken | Authentication |
+| bcrypt | Password hashing |
+| firebase-admin | Push notifications |
+| nodemailer | Email services |
+| node-cron | Background job scheduling |
+| multer | File uploads |
+| dotenv | Environment configuration |
+| cors | Cross-origin support |
+| winston / morgan | Logging middleware |
 
 ---
 
@@ -113,13 +114,13 @@ npm start | Start production server |
 
 | Role | Responsibilities |
 |------|------------------|
-Admin | Manages users, classes, notifications, support, static content |
-Mentor | Supervises instructors, assigns activities, tracks progress |
-Instructor | Conducts classes, marks attendance, manages prisoner records |
-User | Registers for classes, submits journals, tracks milestones |
+| **Admin** | Manages users, classes, notifications, support, static content |
+| **Mentor** | Supervises instructors, assigns activities, tracks progress |
+| **Instructor** | Conducts classes, marks attendance, manages prisoner records |
+| **User** | Registers for classes, submits journals, tracks milestones |
 
-⚠️ **Prisoners do not access the system directly.**  
-Instructors manage their attendance, progress, and records.
+⚠️ **Important:**  
+Prisoners do not directly access the system. Instructors manage attendance, progress, and records on their behalf.
 
 ---
 
@@ -127,20 +128,22 @@ Instructors manage their attendance, progress, and records.
 
 | Endpoint Group | Description |
 |----------------|-------------|
-/auth | Authentication & authorization |
-/classes | Class management |
-/register-class | Class registration |
-/attendance | Attendance tracking |
-/mentorship | Mentorship activities |
-/milestones | Progress & rewards |
-/notifications | Push notifications |
-/support | Support tickets |
-/incidents | Incident reporting |
-/static-content | Privacy, Terms, About |
-/location | Location assignments |
-/admin | Admin operations |
-/instructor | Instructor operations |
-/mentor | Mentor operations |
+| `/auth` | Authentication & authorization |
+| `/classes` | Class management |
+| `/register-class` | Class registration |
+| `/attendance` | Attendance tracking |
+| `/mentorship` | Mentorship activities |
+| `/milestones` | Progress & rewards |
+| `/notifications` | Push notifications |
+| `/support` | Support tickets |
+| `/incidents` | Incident reporting |
+| `/static-content` | Privacy, Terms, About |
+| `/location` | Location assignments |
+| `/admin` | Admin operations |
+| `/instructor` | Instructor operations |
+| `/mentor` | Mentor operations |
+
+All routes follow RESTful standards and are protected with appropriate authentication and role-based middleware.
 
 ---
 
@@ -148,7 +151,7 @@ Instructors manage their attendance, progress, and records.
 
 ```bash
 all-in-the-ring-backend/
-├── config/         # DB & Firebase configuration
+├── config/         # Database & Firebase configuration
 ├── controllers/    # Business logic (role-based)
 │   ├── admin/
 │   ├── mentor/
@@ -156,114 +159,149 @@ all-in-the-ring-backend/
 │   └── user/
 ├── cron/           # Background jobs
 ├── logs/           # Application logs
-├── middlewares/    # Auth, validation, rate limiting
+├── middlewares/    # Authentication, validation, rate limiting
 ├── models/         # Mongoose schemas
-├── routes/         # API routes
+├── routes/         # API route definitions
 ├── services/       # Reusable business logic
 ├── utils/          # Helper utilities
 ├── Dockerfile      # Container setup
 ├── Jenkinsfile     # CI/CD pipeline
-├── server.js       # Entry point
+├── server.js       # Application entry point
 └── package.json
+```
+
+---
 
 # ⚙️ Installation
 
-git clone <repo-url>
+## 1️⃣ Clone Repository
+
+```bash
+git clone <repository-url>
 cd all-in-the-ring-backend
+```
+
+## 2️⃣ Install Dependencies
+
+```bash
 npm install
+```
 
+---
 
-▶️ Running the Application
-# Development
+# ▶️ Running the Application
+
+### Development Mode
+
+```bash
 npm run dev
+```
 
-# Production
+### Production Mode
+
+```bash
 npm start
+```
 
-Server will start on:
+Server runs at:
 
+```
 http://localhost:5000
-🌍 Environment Variables
+```
 
-Create a .env file:
+---
 
+# 🌍 Environment Variables
+
+Create a `.env` file in the root directory:
+
+```
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 
-FIREBASE_PROJECT_ID=
-FIREBASE_PRIVATE_KEY=
-FIREBASE_CLIENT_EMAIL=
+FIREBASE_PROJECT_ID=your_project_id
+FIREBASE_PRIVATE_KEY=your_private_key
+FIREBASE_CLIENT_EMAIL=your_client_email
+```
 
-⚠️ Never commit .env to version control.
+⚠️ Never commit the `.env` file to version control.
 
-🔒 Security Features
+---
 
-JWT-based authentication
+# 🔒 Security Features
 
-Role-based access control
+- JWT-based authentication  
+- Role-based access control (RBAC)  
+- Input validation middleware  
+- API rate limiting  
+- Secure environment configuration  
+- Centralized logging  
+- Soft delete with recovery capability  
 
-Input validation middleware
+---
 
-API rate limiting
+# 🐳 Docker Deployment
 
-Secure environment handling
+Build Docker image:
 
-Centralized logging
-
-Soft delete with recovery
-
-🐳 Docker Support
+```bash
 docker build -t all-in-the-ring-backend .
+```
+
+Run container:
+
+```bash
 docker run -p 5000:5000 all-in-the-ring-backend
-🔄 CI/CD (Jenkins)
+```
+
+---
+
+# 🔄 CI/CD Pipeline (Jenkins)
 
 The Jenkins pipeline automates:
 
-Dependency installation
+- Dependency installation  
+- Docker image build  
+- Test execution  
+- Production deployment  
 
-Docker image build
+---
 
-Test execution
+# 📜 Logging & Monitoring
 
-Production deployment
+- Centralized logger middleware  
+- Logs stored in `/logs` directory  
+- Request & response logging  
+- Structured error tracking for debugging and monitoring  
 
-📜 Logging
+---
 
-Centralized logger middleware
+# 📈 Scalability & Design Principles
 
-Logs stored in /logs directory
+- Modular architecture  
+- Strict separation of concerns  
+- Reusable services (DRY principle)  
+- Background job automation  
+- Soft delete with rollback  
+- Structured mentorship hierarchy  
 
-Request/response logging
+---
 
-Error tracking for debugging
+# 📌 Production Status
 
-📈 Scalability & Design Principles
+✅ Production-ready  
+✅ Secure & scalable  
+✅ Modular & maintainable  
+✅ Designed for institutional deployment  
 
-Modular architecture
+---
 
-Separation of concerns
+# 📬 Contact & Support
 
-Reusable services (DRY)
+For questions, support, or contributions:
 
-Background job automation
+- Contact the development team  
+- Or create a support ticket within the system  
 
-Soft delete with rollback
-
-Structured mentorship hierarchy
-
-📌 Production Status
-
-✅ Production-ready
-✅ Secure & scalable
-✅ Modular & maintainable
-✅ Designed for institutional deployment
-
-📬 Contact & Support
-
-For questions, support, or contributions, please contact the development team or create a support ticket within the system.
-
-<div align="center">
-
-
-</div> ```
+---
