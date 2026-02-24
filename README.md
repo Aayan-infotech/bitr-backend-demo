@@ -1,5 +1,4 @@
 🎯 All In The Ring – Backend
-
 A Norway-based training and rehabilitation management system backend designed to manage structured learning programs for community users and prisoners within correctional facilities.
 
 This backend enables secure, role-based operations including:
@@ -23,79 +22,79 @@ Incident reporting
 Built with scalability, modularity, and clean architecture principles.
 
 🚀 Tech Stack
-
-Node.js – Runtime environment
-
-Express.js – REST API framework
-
-MongoDB – NoSQL database
-
-Mongoose – ODM for MongoDB
-
-Firebase – Push notifications
-
-JWT – Authentication
-
-Docker – Containerization
-
-Jenkins – CI/CD pipeline
-
+Technology	Purpose
+Node.js	Runtime environment
+Express.js	REST API framework
+MongoDB	NoSQL database
+Mongoose	ODM for MongoDB
+Firebase	Push notifications
+JWT	Authentication
+Docker	Containerization
+Jenkins	CI/CD pipeline
 🏗 Architecture Overview
-
 The backend follows a modular MVC-inspired structure:
 
-Models       → Database schemas
-Controllers  → Business logic
-Routes       → API endpoints
-Middlewares  → Authentication & validation
-Services     → Reusable business logic
-Utils        → Helper utilities
-Cron         → Background jobs
-Config       → External integrations
-
+text
+Routes → Middlewares → Controllers → Services → Models → Database
+Component Breakdown
+Layer	Responsibility
+Models	Database schemas (Mongoose)
+Controllers	Business logic & request handling
+Routes	API endpoint definitions
+Middlewares	Authentication, validation, rate limiting
+Services	Reusable business logic
+Utils	Helper utilities
+Cron	Background jobs
+Config	External integrations (DB, Firebase)
 This structure ensures:
 
-Clean separation of concerns
+✅ Clean separation of concerns
 
-Easy scalability
+✅ Easy scalability
 
-Maintainability
+✅ Maintainability
 
-Clear responsibility boundaries
+✅ Clear responsibility boundaries
 
 📁 Project Structure
+text
 all-in-the-ring-backend/
-├─ config/                  # Database & Firebase configuration
-├─ controllers/             # Application business logic
-├─ cron/                    # Background jobs
-├─ logs/                    # Log files
-├─ middlewares/             # Auth, validation, rate limiting
-├─ models/                  # Mongoose schemas
-├─ routes/                  # REST API routes
-├─ services/                # Core reusable logic
-├─ utils/                   # Helper utilities
-├─ Dockerfile               # Docker container setup
-├─ Jenkinsfile              # CI/CD configuration
-├─ server.js                # Application entry point
-└─ package.json             # Project dependencies
+├── config/                  # Database & Firebase configuration
+├── controllers/             # Application business logic
+│   ├── admin/               # Admin-specific controllers
+│   ├── mentor/              # Mentor-specific controllers
+│   ├── instructor/          # Instructor-specific controllers
+│   └── user/                # User-specific controllers
+├── cron/                     # Background jobs
+├── logs/                      # Log files
+├── middlewares/               # Auth, validation, rate limiting
+├── models/                    # Mongoose schemas
+├── routes/                    # REST API routes
+│   ├── adminRoutes.js
+│   ├── authRoutes.js
+│   ├── classRoutes.js
+│   └── ...
+├── services/                  # Core reusable logic
+├── utils/                     # Helper utilities
+├── Dockerfile                 # Docker container setup
+├── Jenkinsfile                # CI/CD configuration
+├── server.js                  # Application entry point
+└── package.json               # Project dependencies
 👥 User Roles & Hierarchy
-
-The system supports four primary roles:
+The system supports four primary roles with strict permissions:
 
 🔹 Admin
-
 Manages users, mentors, instructors, prisoners
 
 Creates & manages classes
 
-Sends notifications
+Sends mass notifications
 
-Handles static content
+Handles static content (Privacy, Terms, About)
 
 Manages support tickets
 
 🔹 Mentor
-
 Supervises instructors
 
 Creates mentorship activities
@@ -105,183 +104,203 @@ Assigns users to activities
 Tracks user progress
 
 🔹 Instructor
+Conducts assigned classes
 
-Conducts classes
+Creates & manages prisoner profiles
 
-Creates prisoner profiles
-
-Marks attendance
+Marks attendance (users & prisoners)
 
 Provides session feedback
 
 Manages assigned users
 
 🔹 User
-
-Registers for classes
+Registers for available classes
 
 Submits journals & questionnaires
 
-Tracks progress & rewards
+Tracks progress & earns rewards
 
 Communicates with mentor/instructor
 
-⚠ Prisoners do not directly access the system. Instructors manage attendance and records on their behalf.
+⚠ Note: Prisoners do not directly access the system. Instructors manage all attendance, progress, and records on their behalf.
 
 📚 Core Features
-
-Role-based authentication & authorization
-
-Location-based class management
-
-Session-based attendance tracking
-
-Journal & notes modules
-
-Questionnaire system
-
-Milestone & reward tracking
-
-Mentorship activity management
-
-Instructor-user assignment system
-
-One-to-one chat support
-
-Push notifications (Firebase)
-
-Incident reporting
-
-Support ticket system
-
-Dynamic static content management
-
-Soft delete with rollback capability
-
-PDF progress report generation
-
-Background cron jobs for data integrity
-
-🔐 Security Features
-
+🔐 Authentication & Authorization
 JWT-based authentication
 
 Role-based access control (RBAC)
 
-Input validation middleware
+Secure password hashing
 
-API rate limiting
+OTP verification support
 
-Server rate limiting
+📅 Class Management
+Location-based class creation
 
-Secure environment variable handling
+Daily/weekly/monthly schedules
 
-Logging middleware
+Instructor assignment
 
-Soft delete tracking & rollback
+User registration system
+
+📝 Session Management
+Notes & journals
+
+Questionnaires
+
+Feedback collection
+
+Attendance tracking
+
+🏆 Progress & Rewards
+Milestone tracking
+
+Reward system based on attendance
+
+PDF progress report generation
+
+Performance monitoring
+
+💬 Communication
+One-to-one chat (hierarchy-restricted)
+
+Push notifications (Firebase)
+
+Mass notifications (Admin)
+
+🛠 Support & Incidents
+Support ticket system
+
+Incident reporting
+
+Admin ticket management
+
+📄 Content Management
+Dynamic static content (Privacy, Terms, About)
+
+Soft delete with rollback capability
+
+Audit logging
+
+⏱ Background Jobs
+Cron jobs for data integrity
+
+Automated report generation
+
+Notification scheduling
+
+🔒 Security Features
+✅ JWT-based authentication
+
+✅ Role-based access control (RBAC)
+
+✅ Input validation middleware
+
+✅ API rate limiting
+
+✅ Server rate limiting
+
+✅ Secure environment variable handling
+
+✅ Logging middleware
+
+✅ Soft delete tracking & rollback
 
 📊 API Structure
-
 All APIs follow RESTful standards and are grouped by domain:
 
-/auth
-/classes
-/register-class
-/attendance
-/mentorship
-/milestones
-/notifications
-/support
-/incidents
-/static-content
-/location
-/admin
-/instructor
-/mentor
-
-Each route is modular and mapped to its respective controller.
+Endpoint Group	Description
+/auth	Authentication & authorization
+/classes	Class management
+/register-class	Class registration
+/attendance	Attendance marking & tracking
+/mentorship	Mentorship activities
+/milestones	Progress & rewards
+/notifications	Push & in-app notifications
+/support	Support tickets
+/incidents	Incident reporting
+/static-content	Privacy, Terms, About
+/location	Location-based assignments
+/admin	Admin operations
+/instructor	Instructor operations
+/mentor	Mentor operations
+Each route is modular and mapped to its respective controller with proper middleware protection.
 
 ⚙️ Environment Setup
-1️⃣ Clone the repository
+1️⃣ Clone the Repository
+bash
 git clone <repository-url>
 cd all-in-the-ring-backend
-2️⃣ Install dependencies
+2️⃣ Install Dependencies
+bash
 npm install
 3️⃣ Configure Environment Variables
-
 Create a .env file in the root directory:
 
+env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 FIREBASE_PROJECT_ID=your_project_id
 FIREBASE_PRIVATE_KEY=your_private_key
 FIREBASE_CLIENT_EMAIL=your_client_email
+⚠ Never commit sensitive credentials to version control.
 
-Ensure sensitive credentials are never committed.
+4️⃣ Run the Application
+Development Mode:
 
-4️⃣ Run the application
-
-Development mode:
-
+bash
 npm run dev
+Production Mode:
 
-Production mode:
-
+bash
 npm start
 🐳 Docker Deployment
-
-Build Docker image:
-
+Build Docker Image
+bash
 docker build -t all-in-the-ring-backend .
-
-Run container:
-
+Run Container
+bash
 docker run -p 5000:5000 all-in-the-ring-backend
 🔄 CI/CD (Jenkins)
+The project includes a Jenkinsfile that automates:
 
-The project includes a Jenkinsfile to:
+Dependency installation
 
-Install dependencies
+Docker image build
 
-Build Docker image
+Test execution
 
-Run tests
-
-Deploy to server
+Production deployment
 
 📄 Logging
-
 Centralized logger middleware
 
-Logs stored in /logs
+Logs stored in /logs directory
 
-Useful for debugging & monitoring
+Request/response logging
+
+Error tracking for debugging & monitoring
 
 📈 Scalability & Design Principles
+✅ Modular architecture – Easy to add new features
 
-Modular architecture
+✅ Separation of concerns – Clean, maintainable code
 
-Clear separation of business logic
+✅ Reusable services – DRY principle
 
-Reusable services layer
+✅ Background job processing – Cron-based automation
 
-Background job processing
+✅ Soft delete with recovery – Data safety
 
-Soft delete with recovery
-
-Structured mentorship hierarchy
+✅ Structured mentorship hierarchy – Clear role workflows
 
 📌 Production Status
+✅ Production-ready
+✅ Modular & maintainable
+✅ Secure & scalable
+✅ Designed for structured training & rehabilitation systems
 
-This backend is:
-
-Production-ready
-
-Modular
-
-Secure
-
-Scalable
-
-Designed for structured training & rehabilitation systems
+📬 Contact & Support
+For questions, support, or contributions, please reach out to the development team or create a support ticket within the system.
