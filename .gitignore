@@ -1,0 +1,15 @@
+
+.env
+node_modules/
+
+logs/
+logs/combined.log
+*.log
+
+uploads/
+upload/
+localupload/
+tmp/
+
+secret.json
+lib/cred.json
